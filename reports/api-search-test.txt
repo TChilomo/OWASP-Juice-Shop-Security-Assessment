@@ -1,0 +1,19 @@
+API search input test
+Target: Local OWASP Juice Shop
+Endpoint: /rest/products/search
+Input: A single apostrophe (q=%27)
+
+Observed response: {"status":"success","data":[]}
+No database error or stack trace was visible in this response.
+
+Conclusion: This test did not demonstrate SQL injection.
+A single test does not establish that the endpoint is secure.
+
+Evidence: evidence/search-apostrophe.json
+
+Baseline comparison:
+The apple search returned 3 products: Apple Juice, Apple Pomace,
+and Pineapple Juice.
+The apostrophe search returned 0 products.
+Both saved responses were successfully parsed as JSON using Python.
+Baseline evidence: evidence/search-apple.json

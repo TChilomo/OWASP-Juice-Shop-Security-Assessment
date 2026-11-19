@@ -1,0 +1,12 @@
+Juice Shop: HTTP Header Review
+
+ABSENT: Content-Security-Policy
+PRESENT: X-Content-Type-Options: nosniff
+PRESENT: X-Frame-Options: SAMEORIGIN
+ABSENT: Referrer-Policy
+ABSENT: Permissions-Policy
+
+Access-Control-Allow-Origin: *
+
+These are observations, not confirmed vulnerabilities.
+Header presence alone does not prove correct configuration.

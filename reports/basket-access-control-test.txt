@@ -1,0 +1,58 @@
+BASKET ACCESS CONTROL TEST
+Tester: Thomson Chilomo
+Date: 12 November 2026
+Target: Local OWASP Juice Shop
+Finding: Cross-account basket access (IDOR)
+
+Scope
+Testing used two accounts created by the tester
+on http://127.0.0.1:3000.
+
+Account details
+thomson.lab1new@example.com: UserId 26, basket 7.
+thomson.lab2@example.com: UserId 25, basket 6.
+
+Steps
+1. Logged in as thomson.lab1new@example.com.
+2. Captured GET /rest/basket/7 in Firefox Network.
+3. Selected Edit and Resend.
+4. Kept the account's Authorization header unchanged.
+5. Changed only the URL to /rest/basket/6.
+6. Sent the modified GET request.
+
+Expected result
+The server should deny access to another user's
+basket without returning its data.
+
+Actual result
+HTTP 200 OK.
+Response status: success.
+Returned basket ID: 6.
+Returned UserId: 25.
+Products: empty list.
+Juice Shop marked the View Basket challenge solved.
+
+Impact
+An authenticated user could read another account's
+basket metadata by changing the basket ID.
+
+Evidence
+evidence/basket-cross-account.json
+Firefox screenshots showing the request and response.
+The saved JSON was validated with python3 -m json.tool.
+
+Recommendation
+Enforce server-side ownership checks on every basket
+request. Match the basket owner to the authenticated
+user before returning data. Deny access by default.
+
+Retest criteria
+Own-basket requests should succeed.
+Cross-account requests should return no basket data.
+Requests without authentication should be rejected.
+
+Limitations
+Only read access between these two lab accounts was
+tested. Both baskets were empty. Modification,
+deletion and access to other baskets were not tested.
+No fix or remediation retest has been performed.

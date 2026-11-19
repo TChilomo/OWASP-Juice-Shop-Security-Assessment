@@ -1,0 +1,4 @@
+Own basket: 200 - {'owner_id': 26}
+Another user's basket: 403 - Access denied
+Not logged in: 401 - Login required
+Missing basket: 404 - Basket not found

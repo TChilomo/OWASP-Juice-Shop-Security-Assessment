@@ -1,0 +1,33 @@
+Observation 01: No Content Security Policy observed
+
+Target: http://127.0.0.1:3000/
+Application: Local OWASP Juice Shop lab
+
+Evidence:
+1. The saved homepage response contains no
+   Content-Security-Policy HTTP header.
+2. Searching the saved homepage HTML for
+   "content-security-policy" returned no matches.
+
+Assessment:
+No CSP was observed in the collected homepage response.
+This is a defence-in-depth gap, not proof of an XSS
+vulnerability. XSS was demonstrated separately;
+see the main penetration test report.
+
+Recommendation:
+Develop and test a Content Security Policy appropriate
+for the application, alongside secure handling of input
+and output. Render untrusted search input as plain text.
+
+Evidence files:
+evidence/response-headers.txt
+evidence/homepage.html
+
+Related XSS evidence:
+evidence/html-injection-inspector.png
+evidence/xss-popup-evidence.png
+
+Status:
+CSP observation recorded. XSS confirmed separately.
+Remediation and retesting remain pending.

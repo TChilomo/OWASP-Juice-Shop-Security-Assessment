@@ -1,0 +1,34 @@
+BASKET AUTHENTICATION TEST
+Tester: Thomson Chilomo
+Date: 11 November 2026
+Target: Local OWASP Juice Shop
+Endpoint: GET http://127.0.0.1:3000/rest/basket/6
+
+Purpose
+Compare access to the basket with and without authentication.
+
+Results
+1. Without an Authorization header:
+   HTTP 401 Unauthorized.
+   Message: No Authorization header was found.
+
+2. Logged-in browser request with a Bearer token:
+   HTTP 200 OK.
+   Response status: success.
+   Basket ID: 6.
+   User ID: 25.
+   Products: empty list.
+
+Evidence
+- evidence/basket-no-token.txt
+- evidence/basket-authenticated.json
+- Browser Network panel showing HTTP 200.
+
+Conclusion
+The tested request required authentication and returned
+basket data when a valid logged-in session was used.
+
+Limitations
+Access to another user's basket has not been tested.
+These results do not establish that basket ownership
+checks are enforced.
